@@ -5,8 +5,6 @@ import {TranslateModule} from '@ngx-translate/core';
 import {Routes} from '@angular/router';
 import {BaseComponentComponent} from './base-component/base-component.component';
 import {LoginService} from '../login/login.service';
-import {DynamicFormComponent} from './dynamic-form.component';
-import {DynamicFormItemComponent} from './dynamic-form-item.component';
 import {SklFormComponent} from './skl-form/skl-form.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {TranslateService} from '@ngx-translate/core';
@@ -33,8 +31,8 @@ export function createTranslateHttpLoader(http: HttpClient) {
     })
 
   ],
-  exports: [BaseComponentComponent, DynamicFormComponent, DynamicFormItemComponent, SklFormComponent, SklNavigatorComponent, SklSidermenuComponent, SklBreadcrumbComponent, SklListComponent],
-  declarations: [BaseComponentComponent, DynamicFormComponent, DynamicFormItemComponent, SklFormComponent, SklNavigatorComponent, SklSidermenuComponent, SklBreadcrumbComponent, SklListComponent],
+  exports: [BaseComponentComponent, SklFormComponent, SklNavigatorComponent, SklSidermenuComponent, SklBreadcrumbComponent, SklListComponent],
+  declarations: [BaseComponentComponent, SklFormComponent, SklNavigatorComponent, SklSidermenuComponent, SklBreadcrumbComponent, SklListComponent],
   providers: [LoginService, TranslateService]
 })
 export class SklCoreModule {

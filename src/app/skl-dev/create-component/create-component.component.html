@@ -1,0 +1,80 @@
+<nz-layout class="layout">
+  <nz-sider [nzWidth]="200" style="background:#fff">
+    <nz-input-group [nzSuffix]="suffixIcon">
+      <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue">
+    </nz-input-group>
+    <ng-template #suffixIcon>
+      <i nz-icon type="search"></i>
+    </ng-template>
+    <nz-tree
+      #treeCom
+      [(nzData)]="nodes"
+      [nzShowLine]="true"
+      (nzExpandChange)="mouseAction('expand',$event)"
+      (nzDblClick)="mouseAction('dblclick',$event.preventDefault())"
+      (nzContextMenu)="mouseAction('contextmenu', $event)"
+      (nzClick)="mouseAction('click',$event)"
+      [nzSearchValue]="searchValue">
+    </nz-tree>
+  </nz-sider>
+  <nz-content>
+    <nz-tabset [(nzSelectedIndex)]="tabindex">
+      <nz-tab nzTitle="{{'designcomponent'|translate}}">
+        <app-skl-form formtitle="" [formcolnames]="formcolnames"
+                      (action)="dosubmit($event)" [formdata]="formdata"
+                      ngutter=40 ncolcount=2 [buttons]="['save','delete','create']"></app-skl-form>
+        <app-skl-list listtitle="{{'designelmentstitle'|translate}}" [listdata]="listdata"
+                      [listcolnames]="listcolnames" (listdatachange)="listdatachange($event)"
+                      [zScroll]="{ x: '1650px' }"></app-skl-list>
+
+      </nz-tab>
+
+      <nz-tab nzTitle="{{'preview'|translate}}">
+        <ng-container [ngSwitch]="formdata.Style">
+
+          <ng-container *ngSwitchCase="'formlist'">
+            <app-skl-list [listtitle]="formdata.Title" [listdata]="designlistdata"
+                          [listcolnames]="listdata" [zScroll]="{ x: '1650px' }" ></app-skl-list>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'singletablelist'">
+            <app-skl-list [listtitle]="formdata.Title" [listdata]="designlistdata"
+                          [listcolnames]="listdata" ></app-skl-list>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'query'">
+            <app-skl-form [formtitle]="formdata.Title" [formcolnames]="listdata" [ngutter]="formdata.Gutter"
+                          [ncolcount]="formdata.Colcount" [formdata]="designformdata"></app-skl-form>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'list'">
+            <app-skl-list [listtitle]="formdata.Title" [listdata]="designlistdata"
+                          [listcolnames]="listdata" listtype="'query'"></app-skl-list>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'listandsave'">
+            <app-skl-list [listtitle]="formdata.Title" [listdata]="designlistdata"
+                          [listcolnames]="listdata" listtype="'query'"></app-skl-list>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            <app-skl-form [formtitle]="formdata.Title" [formcolnames]="listdata"
+                          [formdata]="designformdata"
+                          [ngutter]="formdata.Gutter" [ncolcount]="formdata.Colcount"
+                          [buttons]="formdata.Buttons"></app-skl-form>
+            <app-skl-list
+              pagetitle="listdata.Title"
+              [listdata]="listdata"
+              [listcolnames]="listcolnames"
+              [zScroll]="{ x: '400px' }"
+              tablesize="small"
+            >
+            </app-skl-list>
+          </ng-container>
+
+        </ng-container>
+      </nz-tab>
+
+    </nz-tabset>
+  </nz-content>
+</nz-layout>

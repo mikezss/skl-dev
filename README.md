@@ -2,7 +2,7 @@
 
 ## Project description  
 * help skl to develop quickly.   
-* BY page designer and autogeneration code.
+* BY page designer and autogeneration code.  
 
 ## Features  
 * can generate angular module  
